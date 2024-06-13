@@ -12,9 +12,19 @@ export default function Component() {
     );
   }
   return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-    </>
+    <div className="w-full h-screen flex items-center justify-center">
+      <div className="text-center">
+        <div className="flex flex-col gap-3">
+          <h1 className="text-4xl font-bold">Sign in</h1>
+          <button
+            className="bg-orange-500 py-1 px-3  rounded-md mt-1"
+            onClick={() => signIn()}
+          >
+            Sign in
+          </button>
+          <p className="text-gray-600">Please sign in to continue to the app</p>
+        </div>
+      </div>
+    </div>
   );
 }
