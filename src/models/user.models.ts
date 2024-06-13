@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose";
-import { Message, messageSchema } from "./message.models.js";
+import { Message, messageSchema } from "./message.models";
 
 export interface User extends Document {
   username: string;
