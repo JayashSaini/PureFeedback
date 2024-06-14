@@ -11,43 +11,11 @@ const usernameValidator = z
   .max(20, { message: "Username maximum 20 characters can long" })
   .regex(/^[a-zA-Z0-9]+$/, {
     message: "Username can only contain letters and numbers",
-  })
-  .refine(
-    async (username) => {
-      const user: User | null = await UserModel.findOne({ username });
-      if (user) {
-        if (user.isVerified) {
-          return false;
-        }
-        return true;
-      }
-      return true;
-    },
-    {
-      message: "username is already exists",
-    }
-  );
+  });
 
-const emailValidator = z
-  .string()
-  .email({
-    message: "please provide valid email address",
-  })
-  .refine(
-    async (email) => {
-      const user: User | null = await UserModel.findOne({ email });
-      if (user) {
-        if (user.isVerified) {
-          return false;
-        }
-        return true;
-      }
-      return true;
-    },
-    {
-      message: "email is already exists",
-    }
-  );
+const emailValidator = z.string().email({
+  message: "please provide valid email address",
+});
 
 const passwordValidator = z
   .string()

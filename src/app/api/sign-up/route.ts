@@ -8,6 +8,29 @@ export async function POST(request: Request) {
   try {
     const { username, email, password } = await request.json();
 
+    const user = await User.findOne({
+      $or: [
+        {
+          username,
+        },
+        {
+          email,
+        },
+      ],
+    });
+
+    if (user) {
+      return Response.json(
+        {
+          success: false,
+          message: "User or Email is already exists!",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
     // encrypt the password to store in the database
     const hashedPassword = bcrypt.hashSync(password, 10);
 
