@@ -2,6 +2,7 @@ import { connectDB } from "@/lib/connectDB";
 import { sendVerificationEmail } from "@/helpers/verificationEmail";
 import User from "@/models/user.models";
 import bcrypt from "bcryptjs";
+import moment from "moment";
 
 export async function POST(request: Request) {
   await connectDB();
@@ -34,8 +35,9 @@ export async function POST(request: Request) {
     // encrypt the password to store in the database
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    const expiryDate = Date.now();
-    const verifyCodeExpiry = new Date(expiryDate + 60 * 60 * 1000);
+    const now = moment();
+    const verifyCodeExpiry = now.add(1, "hour");
+
     const verifyCode = Math.floor(100000 + Math.random() * 900000);
 
     // send verification email to the user

@@ -2,7 +2,7 @@ import { z } from "zod";
 import UserModel, { User } from "@/models/user.models";
 import { maxHeaderSize } from "http";
 
-const usernameValidator = z
+export const usernameValidator = z
   .string({
     required_error: "username is required",
     invalid_type_error: "username must be a string",
