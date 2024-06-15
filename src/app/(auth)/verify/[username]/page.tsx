@@ -1,7 +1,8 @@
 "use client";
+
 import { verifyUsernameValidator } from "@/schema/verify.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import React, { useState } from "react";
 import * as z from "zod";
 import axios, { AxiosError, AxiosResponse } from "axios";
@@ -18,10 +19,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-const page = () => {
+const VerifyPage = () => {
   const param = useParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
@@ -57,7 +57,7 @@ const page = () => {
   };
 
   return (
-    <div className="w-full h-screen first-class flex items-center justify-center">
+    <div className="w-full h-screen flex items-center justify-center">
       <div className="max-w-[400px] w-full p-5 border-2 rounded-xl border-[#be3144] shadow-xl mx-5">
         <h2 className="md:text-3xl text-2xl mb-4 text-center font-medium">
           Verify Account
@@ -114,4 +114,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default VerifyPage;
