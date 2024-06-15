@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import * as z from "zod";
 
@@ -128,7 +129,7 @@ const Page = () => {
           </Form>
           <div className="w-full text-center text-black mt-2">
             <p className="text-xs">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/sign-up" className="text-blue-500 text-sm">
                 Sign Up
               </Link>
