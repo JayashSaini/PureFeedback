@@ -35,7 +35,6 @@ export async function GET(request: Request) {
 
     const user = await User.findOne({
       username: queryParams.username,
-      isVerified: true,
     });
 
     if (user) {

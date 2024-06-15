@@ -8,19 +8,19 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       id: "credentials",
-      name: "Credentials",
+      name: "credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        identifier: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: any): Promise<any> {
         try {
           await connectDB();
-
+          console.log("credentials are : ", credentials);
           const user: User | null = await UserModel.findOne({
-            email: credentials.email,
+            email: credentials.identifier,
           });
-
+          console.log("user is : ", user);
           if (!user) {
             throw new Error("User not found");
           }

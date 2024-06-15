@@ -195,7 +195,7 @@ const Page = () => {
               />
               <Button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={usernameMessage=="Username is available" ? false : true}
                 className="w-full text-center bg-[#be3144] text-white rounded-lg hover:bg-[#a32032]"
               >
                 {isSubmitting ? (

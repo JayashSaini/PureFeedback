@@ -21,15 +21,28 @@ export async function POST(request: Request) {
     });
 
     if (user) {
-      return Response.json(
-        {
-          success: false,
-          message: "User or Email is already exists!",
-        },
-        {
-          status: 400,
-        }
-      );
+      if (user.email === email) {
+        return Response.json(
+          {
+            success: false,
+            message: "Email is already exists!",
+          },
+          {
+            status: 400,
+          }
+        );
+      }
+      if (user.isVerified) {
+        return Response.json(
+          {
+            success: false,
+            message: "Username is already taken",
+          },
+          {
+            status: 400,
+          }
+        );
+      }
     }
 
     // encrypt the password to store in the database
