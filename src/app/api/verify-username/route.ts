@@ -11,15 +11,10 @@ export async function POST(request: Request) {
     const result = verifyUsernameValidator.safeParse({ username, code });
 
     if (!result.success) {
-      const usernameErrors = result.error.format().username?._errors || [];
       const codeError = result.error.format().code?._errors || [];
 
       const getMessage =
-        usernameErrors.length > 0
-          ? usernameErrors[0]
-          : codeError.length > 0
-          ? codeError[0]
-          : "Invalid parameters";
+        codeError.length > 0 ? codeError[0] : "Invalid parameters";
 
       return Response.json(
         {
@@ -42,6 +37,18 @@ export async function POST(request: Request) {
         {
           success: false,
           message: "username is not found",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    if (user.isVerified) {
+      return Response.json(
+        {
+          success: false,
+          message: "User is already verified",
         },
         {
           status: 400,

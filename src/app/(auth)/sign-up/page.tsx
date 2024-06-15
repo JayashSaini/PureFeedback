@@ -141,7 +141,7 @@ const Page = () => {
                           usernameMessage === "Username is available"
                             ? "text-green-700"
                             : "text-[#be3144]"
-                        }`}
+                        } text-sm`}
                       >
                         {usernameMessage}
                       </div>
@@ -201,8 +201,8 @@ const Page = () => {
                 {isSubmitting ? (
                   <TailSpin
                     visible={true}
-                    height="33"
-                    width="33"
+                    height="27"
+                    width="27"
                     color="#fff"
                     ariaLabel="tail-spin-loading"
                     radius="1"
@@ -210,7 +210,7 @@ const Page = () => {
                     wrapperClass=""
                   />
                 ) : (
-                  "Submit"
+                  "Sign up"
                 )}
               </Button>
             </form>
