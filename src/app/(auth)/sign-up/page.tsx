@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useDebounceValue } from "usehooks-ts";
+import { useDebounceCallback } from "usehooks-ts";
 import { ApiResponse } from "@/types/ApiResponse.types";
 import * as z from "zod";
 
@@ -28,7 +28,7 @@ const Page = () => {
   const [username, setUsername] = useState<string>("");
   const [isUsernameChecking, setIsUsernameChecking] = useState(false);
   const [usernameMessage, setUsernameMessage] = useState("");
-  const debouncedUsername = useDebounceValue(username, 500);
+  const debounce = useDebounceCallback(setUsername, 500);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
@@ -42,30 +42,38 @@ const Page = () => {
     },
   });
 
-  // const checkUsernameUnique = useCallback(() => {
-  //   if (debouncedUsername && !isUsernameChecking) {
-  //     setIsUsernameChecking(true);
-  //     axios
-  //       .get(`/api/unique-username?username=${debouncedUsername}`)
-  //       .then((res: AxiosResponse<ApiResponse>) => {
-  //         setUsernameMessage(res.data.message);
-  //       })
-  //       .catch((err: AxiosError<ApiResponse>) => {
-  //         setUsernameMessage(
-  //           err.response?.data.message ?? "Error checking username"
-  //         );
-  //       })
-  //       .finally(() => {
-  //         setIsUsernameChecking(false);
-  //       });
-  //   } else {
-  //     setUsernameMessage("");
-  //   }
-  // }, [debouncedUsername]);
+  useEffect(() => {
+    let isMounted = true;
 
-  // useEffect(() => {
-  //   checkUsernameUnique();
-  // }, [debouncedUsername, checkUsernameUnique]);
+    if (username) {
+      setIsUsernameChecking(true);
+      axios
+        .get(`/api/unique-username?username=${username}`)
+        .then((res: AxiosResponse<ApiResponse>) => {
+          if (isMounted) {
+            setUsernameMessage(res.data.message);
+          }
+        })
+        .catch((err: AxiosError<ApiResponse>) => {
+          if (isMounted) {
+            setUsernameMessage(
+              err.response?.data.message ?? "Error checking username"
+            );
+          }
+        })
+        .finally(() => {
+          if (isMounted) {
+            setIsUsernameChecking(false);
+          }
+        });
+    } else {
+      setUsernameMessage("");
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [username]);
 
   const onSubmit = (data: z.infer<typeof userValidator>) => {
     setIsSubmitting(true);
@@ -89,7 +97,7 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full h-screen first-color flex md:flex-row flex-col ">
+    <div className="w-full h-screen first-color flex md:flex-row flex-col">
       <div className="md:w-1/2 w-full h-full flex justify-center items-center">
         <div className="max-w-[400px] w-full p-5 border-2 rounded-xl border-[#be3144] shadow-xl mx-5">
           <h2 className="md:text-3xl text-2xl mb-4 text-center font-medium">
@@ -109,12 +117,37 @@ const Page = () => {
                         {...field}
                         onChange={(e) => {
                           field.onChange(e);
-                          setUsername(e.target.value);
+                          debounce(e.target.value);
                         }}
                         className="focus:bg-[#c8ccd1] rounded-md"
                       />
                     </FormControl>
-                    <FormMessage className="text-red-500 text-xs" />
+
+                    {isUsernameChecking && (
+                      <TailSpin
+                        visible={true}
+                        height="27"
+                        width="27"
+                        color="#000"
+                        ariaLabel="tail-spin-loading"
+                        radius="1"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                      />
+                    )}
+                    {usernameMessage && (
+                      <div
+                        className={`${
+                          usernameMessage === "Username is available"
+                            ? "text-green-700"
+                            : "text-[#be3144]"
+                        }`}
+                      >
+                        {usernameMessage}
+                      </div>
+                    )}
+
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -185,7 +218,7 @@ const Page = () => {
           <div className="w-full text-center text-black mt-2">
             <p className="text-xs">
               Already have an account?{" "}
-              <Link href="/sign-in" className="text-blue-500  text-sm">
+              <Link href="/sign-in" className="text-blue-500 text-sm">
                 Sign In
               </Link>
             </p>
