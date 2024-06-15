@@ -22,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import Link from "next/link";
 
 const Page = () => {
   const [username, setUsername] = useState<string>("");
@@ -95,7 +96,7 @@ const Page = () => {
             Sign Up
           </h2>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
                 name="username"
@@ -162,7 +163,7 @@ const Page = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full text-center bg-[#be3144] text-white rounded-lg hover:bg-[#a32032] "
+                className="w-full text-center bg-[#be3144] text-white rounded-lg hover:bg-[#a32032]"
               >
                 {isSubmitting ? (
                   <TailSpin
@@ -181,12 +182,20 @@ const Page = () => {
               </Button>
             </form>
           </Form>
+          <div className="w-full text-center text-black mt-2">
+            <p className="text-xs">
+              Already have an account?{" "}
+              <Link href="/sign-in" className="text-blue-500  text-sm">
+                Sign In
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
       <div className="md:w-1/2 md:flex hidden justify-center items-center h-full">
-        <div className="w-[80%] h-[100%] relative">
+        <div className="w-[70%] h-[100%] relative">
           <Image
-            src="/images/signin.svg"
+            src="/images/signup.svg"
             alt="Sign up"
             layout="fill"
             objectFit="contain"
