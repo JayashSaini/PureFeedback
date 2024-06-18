@@ -40,9 +40,9 @@ export async function POST(request: Request) {
 
     return new Response(
       JSON.stringify({
-        message: "User updated successfully",
+        message: `Is Accepting Message ${acceptingMessage ? "On" : "Off"}`,
         success: true,
-        user,
+        isAcceptingMessage: acceptingMessage,
       }),
       {
         status: 200,
@@ -98,7 +98,6 @@ export async function GET(request: Request) {
         JSON.stringify({
           message: "User not found",
           success: false,
-          user,
         }),
         {
           status: 400,
@@ -113,7 +112,7 @@ export async function GET(request: Request) {
       JSON.stringify({
         message: "User fetched successfully",
         success: true,
-        user,
+        isAcceptingMessage: user.isAcceptingMessage,
       }),
       {
         status: 200,

@@ -1,28 +1,36 @@
 import { NextRequest, NextResponse } from "next/server";
-export { default } from "next-auth/middleware";
 import { getToken } from "next-auth/jwt";
 
 export async function middleware(request: NextRequest) {
-  const token = await getToken({
-    req: request,
-    secret: process.env.NEXT_AUTH_SECRET,
-  });
-  const url = request.nextUrl;
+  try {
+    const token = await getToken({
+      req: request,
+      secret: process.env.NEXT_AUTH_SECRET,
+    });
+    const { pathname, origin } = new URL(request.url);
+    // Uncommented section for redirecting to /dashboard based on conditions
+    if (
+      token &&
+      (pathname.startsWith("/sign-in") ||
+        pathname.startsWith("/sign-up") ||
+        pathname === "/" ||
+        pathname.startsWith("/verify"))
+    ) {
+      return NextResponse.redirect(new URL("/dashboard", origin).toString());
+    }
 
-  if (
-    token &&
-    (url.pathname.startsWith("/sign-in") ||
-      url.pathname.startsWith("/sign-up") ||
-      url.pathname.startsWith("/") ||
-      url.pathname.startsWith("/verify"))
-  ) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
+    // Uncommented section for redirecting to /sign-in if trying to access /dashboard without token
+    if (!token && pathname.startsWith("/dashboard")) {
+      console.log("Redirecting to /sign-in");
+      return NextResponse.redirect(new URL("/sign-in", origin).toString());
+    }
 
-  if (!token && url.pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/sign-in ", request.url));
+    // Fallback to NextResponse.next() if no redirection conditions are met
+    return NextResponse.next();
+  } catch (error) {
+    console.error("Error in middleware:", error);
+    return NextResponse.error();
   }
-  return NextResponse.next();
 }
 
 export const config = {

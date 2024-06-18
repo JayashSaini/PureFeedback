@@ -3,12 +3,18 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import UserModel from "@/models/user.models";
 import { User } from "next-auth";
-import mongoose from "mongoose";
+import userModels from "@/models/user.models";
 
-export async function GET(request: Request) {
+export async function DELETE(
+  request: Request,
+  { params }: { params: { messageId: string } }
+) {
   await connectDB();
-
   const session = await getServerSession(authOptions);
+
+  // Extract messageId from the URL
+
+  const messageId = params.messageId;
 
   const userSession: User = session?.user as User;
 
@@ -28,39 +34,32 @@ export async function GET(request: Request) {
   }
 
   try {
-    const user = await UserModel.aggregate([
+    const updateResult = await UserModel.updateOne(
       {
-        $match: {
-          _id: new mongoose.Types.ObjectId(userSession._id),
-        },
+        _id: userSession?._id,
       },
       {
-        $unwind: "$message",
-      },
-      {
-        $sort: {
-          "message.createdAt": -1,
-        },
-      },
-      {
-        $group: {
-          _id: "$_id",
+        $pull: {
           message: {
-            $push: "$message",
+            _id: messageId,
           },
         },
       },
-    ]);
+      {
+        new: true,
+      }
+    );
 
-    if (user.length == 0) {
+    const user = await userModels.findById(userSession?._id);
+
+    if (updateResult.modifiedCount == 0) {
       return new Response(
         JSON.stringify({
-          success: true,
-          messages: [],
-          message: "No message found",
+          message: "Error in deleting messages",
+          success: false,
         }),
         {
-          status: 200,
+          status: 500,
           headers: {
             "Content-Type": "application/json",
           },
@@ -70,21 +69,20 @@ export async function GET(request: Request) {
 
     return new Response(
       JSON.stringify({
+        message: "Message deleted successfully",
         success: true,
-        messages: user[0]?.message || [],
       }),
       {
-        status: 200,
+        status: 200, // Updated status to 200
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
   } catch (error: any) {
-    console.log("Error in fetch messages ", error.message);
     return new Response(
       JSON.stringify({
-        message: error.message || "Error in fetch messages",
+        message: error.message || "Error in deleting messages",
         success: false,
       }),
       {

@@ -17,3 +17,42 @@
 .fourth-color {
   background: #be3144;
 }
+
+/* reset */
+button {
+  all: unset;
+}
+
+/* Switch */
+.SwitchRoot {
+  width: 38px;
+  height: 20px;
+  background-color: #505050;
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+  -webkit-tap-highlight-color: #505050;
+  box-shadow: 0 0 0 3px #505050;
+}
+.SwitchRoot:focus {
+  box-shadow: 0 0 0 3px #505050;
+}
+.SwitchRoot[data-state="checked"] {
+  background-color: #191919;
+  box-shadow: 0 0 0 3px #191919;
+}
+
+.SwitchThumb {
+  display: block;
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  border-radius: 9999px;
+  box-shadow: 0 2px 2px #505050;
+  transition: transform 100ms;
+  transform: translateX(2px);
+  will-change: transform;
+}
+.SwitchThumb[data-state="checked"] {
+  transform: translateX(19px);
+}
