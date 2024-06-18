@@ -10,7 +10,7 @@ const Navbar = () => {
   const user: User = session?.user as User;
 
   return (
-    <nav className="w-full flex justify-between items-center p-5  bg-[#be3144] text-white shadow-xl">
+    <nav className="w-full flex justify-between items-center p-5  bg-[#DDA15E] text-white shadow-xl">
       <h2 className="md:text-2xl text-xl font-bold">Pure Feedback</h2>
       <div>
         {session ? (

@@ -1,0 +1,132 @@
+[
+  {
+    "content": "This app is amazing and very useful.",
+    "name": "Alice",
+    "receivedAt": "2 hours ago"
+  },
+  {
+    "content": "Good experience, but needs more features.",
+    "name": "Bob",
+    "receivedAt": "4 March 2024"
+  },
+  {
+    "content": "Superb design, easy to navigate interface.",
+    "name": "Charlie",
+    "receivedAt": "1 day ago"
+  },
+  {
+    "content": "Nice app, had fun using it today.",
+    "name": "David",
+    "receivedAt": "3 hours ago"
+  },
+  {
+    "content": "Cool features, but some bugs to fix.",
+    "name": "Eve",
+    "receivedAt": "2 days ago"
+  },
+  {
+    "content": "Well done, keep up the good work!",
+    "name": "Frank",
+    "receivedAt": "5 March 2024"
+  },
+  {
+    "content": "Fine app, could use some improvements.",
+    "name": "Grace",
+    "receivedAt": "1 hour ago"
+  },
+  {
+    "content": "Neat and clean design, very intuitive.",
+    "name": "Hank",
+    "receivedAt": "6 March 2024"
+  },
+  {
+    "content": "Solid performance, quick and responsive app.",
+    "name": "Ivy",
+    "receivedAt": "30 minutes ago"
+  },
+  {
+    "content": "Super app, highly recommended for everyone.",
+    "name": "Jack",
+    "receivedAt": "4 hours ago"
+  },
+  {
+    "content": "Very user-friendly, great job!",
+    "name": "Kate",
+    "receivedAt": "15 minutes ago"
+  },
+  {
+    "content": "Impressive functionality, but needs more updates.",
+    "name": "Liam",
+    "receivedAt": "7 hours ago"
+  },
+  {
+    "content": "Great app, looking forward to future updates.",
+    "name": "Mia",
+    "receivedAt": "8 March 2024"
+  },
+  {
+    "content": "Smooth and efficient, very pleased.",
+    "name": "Noah",
+    "receivedAt": "9 March 2024"
+  },
+  {
+    "content": "Amazing app, very helpful in daily tasks.",
+    "name": "Olivia",
+    "receivedAt": "2 days ago"
+  },
+  {
+    "content": "Fantastic experience, will recommend to friends.",
+    "name": "Paul",
+    "receivedAt": "5 minutes ago"
+  },
+  {
+    "content": "User-friendly interface, easy to understand.",
+    "name": "Quinn",
+    "receivedAt": "10 March 2024"
+  },
+  {
+    "content": "Great performance, very smooth operations.",
+    "name": "Rachel",
+    "receivedAt": "3 days ago"
+  },
+  {
+    "content": "Really good app, but some features missing.",
+    "name": "Sam",
+    "receivedAt": "1 week ago"
+  },
+  {
+    "content": "Perfect app for daily use, love it!",
+    "name": "Tina",
+    "receivedAt": "4 days ago"
+  },
+  {
+    "content": "Wonderful app, very intuitive and fast.",
+    "name": "Uma",
+    "receivedAt": "11 March 2024"
+  },
+  {
+    "content": "Great features, but needs some fixes.",
+    "name": "Victor",
+    "receivedAt": "6 hours ago"
+  },
+  {
+    "content": "Excellent app, exceeded my expectations.",
+    "name": "Wendy",
+    "receivedAt": "12 March 2024"
+  },
+  {
+    "content": "Good design, but can be improved.",
+    "name": "Xander",
+    "receivedAt": "13 March 2024"
+  },
+  {
+    "content": "Very useful app, helps a lot in daily tasks.",
+    "name": "Yara",
+    "receivedAt": "1 week ago"
+  },
+  {
+    "content": "Nice features, but needs more stability.",
+    "name": "Zane",
+    "receivedAt": "14 March 2024"
+  }
+]
