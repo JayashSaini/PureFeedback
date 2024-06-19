@@ -42,7 +42,7 @@ const Page = () => {
         "/api/accept-messages"
       );
       if (res.data.success) {
-        const isAcceptingMessage = res.data.isAcceptingMessage;
+        const isAcceptingMessage = res.data?.isAcceptingMessage || false;
         setValue("isAcceptingMessage", isAcceptingMessage);
       } else {
         toast.error(res.data.message);
@@ -102,7 +102,7 @@ const Page = () => {
         acceptingMessage: !isAcceptingMessage,
       });
       if (res.data.success) {
-        setValue("isAcceptingMessage", res.data.isAcceptingMessage);
+        setValue("isAcceptingMessage", !isAcceptingMessage);
         toast.success(res.data.message);
       } else {
         toast.error(res.data.message);
