@@ -16,7 +16,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 export default function Home() {
   return (
-    <div className="bg-white w-full h-[90vh] flex flex-col justify-center items-center p-3">
+    <div className="bg-white w-full h-[85vh] flex flex-col justify-center items-center p-3">
       <div className="text-[#283618] text-center space-y-3">
         <h1 className="md:text-5xl text-3xl font-bold">
           Empower Honest Feedback, Anonymously and Safely

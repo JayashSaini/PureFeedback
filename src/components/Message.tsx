@@ -61,15 +61,15 @@ const Message = ({ message, messageId, setMessagesHandler }: MessageProp) => {
     return `${formattedDate} ${formattedTime}`;
   }
   return (
-    <Card className="rounded-xl bg-slate-50 py-3">
+    <Card className="rounded-xl bg-[#283618] py-3">
       <CardHeader>
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-center text-[#FEFAE0]">
           <CardTitle>{message.content}</CardTitle>
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button
                 variant="destructive"
-                className=" px-2 py-0 fourth-color hover:bg-[#a32a3a] cursor-pointer rounded-[5px]"
+                className=" px-2 py-0 hover:bg-[#dda25e] bg-[#dda25ece] cursor-pointer rounded-[5px]"
               >
                 <IoCloseSharp className="w-5 h-5" />
               </Button>
@@ -86,7 +86,7 @@ const Message = ({ message, messageId, setMessagesHandler }: MessageProp) => {
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <AlertDialogAction
                   onClick={onDeleteMessageHandler}
-                  className="bg-[#be3144] hover:bg-[#943b47]"
+                  className="bg-[#DDA15E] hover:bg-[#BC6C25] rounded-[8px] cursor-pointer"
                 >
                   Continue
                 </AlertDialogAction>
@@ -94,7 +94,7 @@ const Message = ({ message, messageId, setMessagesHandler }: MessageProp) => {
             </AlertDialogContent>
           </AlertDialog>
         </div>
-        <CardDescription className="text-gray-500">
+        <CardDescription className="text-gray-200">
           {formatMongoDate(message.createdAt)}
         </CardDescription>
       </CardHeader>

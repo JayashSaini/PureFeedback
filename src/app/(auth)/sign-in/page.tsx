@@ -52,18 +52,21 @@ const Page = () => {
 
     toast.success("Sign in successfully");
     setIsSubmitting(false);
-    router.replace("/");
+    router.replace("/dashboard");
   };
 
   return (
-    <div className="w-full h-screen first-color flex md:flex-row flex-col">
+    <div className="w-full h-[85vh] flex md:flex-row flex-col">
       <div className="md:w-1/2 w-full h-full flex justify-center items-center">
-        <div className="max-w-[400px] w-full p-5 border-2 rounded-xl border-[#be3144] shadow-xl mx-5">
-          <h2 className="md:text-3xl text-2xl mb-4 text-center font-medium">
+        <div className="max-w-[400px] w-full p-5 border-2 rounded-xl border-[#283618] shadow-xl mx-5">
+          <h2 className="md:text-3xl text-2xl mb-4 text-center font-medium text-[#181f11]">
             Sign In
           </h2>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-4 overflow-hidden"
+            >
               <FormField
                 control={form.control}
                 name="identifier"
@@ -77,7 +80,7 @@ const Page = () => {
                         onChange={(e) => {
                           field.onChange(e);
                         }}
-                        className="focus:bg-[#c8ccd1] rounded-md"
+                        className="focus:bg-transparent rounded-md"
                       />
                     </FormControl>
                     <FormMessage className="text-red-500 text-xs" />
@@ -98,7 +101,7 @@ const Page = () => {
                         onChange={(e) => {
                           field.onChange(e);
                         }}
-                        className="focus:bg-[#c8ccd1] rounded-md"
+                        className="focus:bg-transparent rounded-md"
                       />
                     </FormControl>
                     <FormMessage className="text-red-500 text-xs" />
@@ -108,7 +111,7 @@ const Page = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full text-center bg-[#be3144] text-white rounded-lg hover:bg-[#a32032]"
+                className="md:w-[323px] w-full text-center bg-[#283618] text-white rounded-lg hover:bg-[#222c17] cursor-pointer"
               >
                 {isSubmitting ? (
                   <TailSpin
@@ -127,7 +130,7 @@ const Page = () => {
               </Button>
             </form>
           </Form>
-          <div className="w-full text-center text-black mt-2">
+          <div className="w-full text-center text-[#283618] mt-2">
             <p className="text-xs">
               Don&apos;t have an account?{" "}
               <Link href="/sign-up" className="text-blue-500 text-sm">
@@ -140,7 +143,7 @@ const Page = () => {
       <div className="md:w-1/2 md:flex hidden justify-center items-center h-full">
         <div className="w-[70%] h-[100%] relative">
           <Image
-            src="/images/signin.svg"
+            src="/images/signIn.svg"
             alt="Sign up"
             layout="fill"
             objectFit="contain"

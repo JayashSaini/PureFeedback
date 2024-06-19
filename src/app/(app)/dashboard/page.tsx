@@ -130,14 +130,16 @@ const Page = () => {
     <div className=" w-full min-h-[90vh] flex flex-col justify-start items-center">
       <div className="md:w-[90%] w-full px-4 py-24">
         <div className="w-full">
-          <h2 className="md:text-4xl text-2xl">
-            <span className="md:text-5xl text-3xl font-sans">Welcome, </span>
-            <span className="font-bold text-[#be3144]">
+          <h2 className="text-2xl md:text-4xl leading-tight md:leading-relaxed">
+            <span className="block text-3xl md:text-5xl font-sans font-light">
+              Hello 👋
+            </span>
+            <span className="text-5xl font-bold text-[#283618] block mt-2">
               {session?.user.username || session?.user?.email}!
             </span>
           </h2>
         </div>
-        <div className="w-full first-color flex justify-between items-center px-2 md:mt-10 mt-5 border-2 border-gray-800 rounded-xl overflow-hidden">
+        <div className="w-full  flex justify-between items-center px-2 md:mt-10 mt-5 border-2 border-[#283618] rounded-xl overflow-hidden">
           <input
             type="text"
             readOnly
@@ -156,8 +158,8 @@ const Page = () => {
           </div>
         </div>
 
-        <div className="mt-12 py-3 px-3 border-gray-400 border-2 rounded-xl">
-          <div className="w-full rounded-xl overflow-hidden bg-slate-100 flex p-4 justify-between items-center">
+        <div className="mt-12 py-3 px-3 border-[#283618] border-2 rounded-xl">
+          <div className="w-full rounded-xl overflow-hidden bg-[#606c387a] flex p-4 justify-between items-center">
             <div className="flex items-center justify-start gap-2">
               <Switch.Root
                 {...register("isAcceptingMessage")}
@@ -184,14 +186,14 @@ const Page = () => {
               )}
             </button>
           </div>
-          <Separator className="bg-gray-300 my-3 h-[2px]" />
-          <div className="w-full rounded-xl bg-slate-100 p-3 overflow-hidden">
+          <Separator className="bg-[#606c3877] my-3 h-[2px]" />
+          <div className="w-full rounded-xl  px-3 py-6 overflow-hidden">
             {Messages.length > 0 ? (
               <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2">
                 {Messages.map((message: Message) => {
                   return (
                     <MessageCard
-                      key={message.id}
+                      key={String(message?._id)}
                       message={message}
                       messageId={String(message._id) || ""}
                       setMessagesHandler={(messageId: string) => {

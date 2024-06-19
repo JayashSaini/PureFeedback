@@ -4,6 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import { User } from "next-auth";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { toast } from "sonner";
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -15,14 +16,17 @@ const Navbar = () => {
       <div>
         {session ? (
           <Button
-            onClick={() => signOut()}
-            className="py-1 px-5 bg-white rounded-xl text-[#be3144] hover:bg-white shadow-lg hover:scale-105 ease-in-out "
+            onClick={() => {
+              signOut();
+              toast.success("You have been signed out");
+            }}
+            className="py-1 px-8  font-semibold text-base bg-white rounded-xl text-[#283618] hover:bg-white shadow-lg hover:scale-105 ease-in-out "
           >
             Logout
           </Button>
         ) : (
           <Link href="/sign-in">
-            <Button className="py-1 px-5 bg-white rounded-xl text-[#be3144] hover:bg-white shadow-lg hover:scale-105 ease-in-out ">
+            <Button className="py-1 px-8  font-semibold text-base bg-white rounded-xl text-[#283618] hover:bg-white shadow-lg hover:scale-105 ease-in-out ">
               Login
             </Button>
           </Link>

@@ -18,19 +18,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <AuthProvider>
+    <AuthProvider>
+      <html lang="en">
         <body className={archivo.className}>
           <NavBar />
           {children}
-          <footer className="w-full text-center mb-8 text-sm  text-[#283618] px-10">
+          <footer className="w-full text-center mb-8 text-sm text-[#283618] px-10">
             Created By Jayash |{" "}
             <a
               target="_blank"
               className="text-blue-600"
               href="https://www.linkedin.com/in/jayash-saini-371bb0267/"
             >
-              Linked in
+              LinkedIn
             </a>{" "}
             |{" "}
             <a
@@ -52,7 +52,7 @@ export default function RootLayout({
           </footer>
           <Toaster position="top-center" />
         </body>
-      </AuthProvider>
-    </html>
+      </html>
+    </AuthProvider>
   );
 }
