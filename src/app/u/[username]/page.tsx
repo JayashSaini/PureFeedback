@@ -22,7 +22,9 @@ import { toast } from "sonner";
 
 const Page = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const params = useParams();
+  const params = useParams<{
+    username: string;
+  }>();
 
   const form = useForm<z.infer<typeof userValidator>>({
     resolver: zodResolver(userValidator),
@@ -35,7 +37,7 @@ const Page = () => {
     try {
       setIsSubmitting(true);
       const res = await axios.post<ApiResponse>("/api/send-messages", {
-        username: params.username,
+        username: params?.username,
         content: data.content,
       });
       if (res.data.success) {
@@ -67,7 +69,7 @@ const Page = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-base">
-                    Send anonymous message to @{params.username}
+                    Send anonymous message to @{params?.username || "Adam"}
                   </FormLabel>
                   <FormControl>
                     <Textarea
