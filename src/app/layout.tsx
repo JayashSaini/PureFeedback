@@ -23,7 +23,7 @@ export default function RootLayout({
         <body className={archivo.className}>
           <NavBar />
           {children}
-          <footer className="w-full text-center absolute bottom-8 text-sm  text-[#283618] px-10">
+          <footer className="w-full text-center mb-8 text-sm  text-[#283618] px-10">
             Created By Jayash |{" "}
             <a
               target="_blank"
