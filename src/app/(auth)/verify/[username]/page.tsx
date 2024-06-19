@@ -22,7 +22,9 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 
 const VerifyPage = () => {
-  const param = useParams();
+  const param = useParams<{
+    username: string;
+  }>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
 
@@ -37,7 +39,7 @@ const VerifyPage = () => {
     setIsSubmitting(true);
     axios
       .post("/api/verify-username", {
-        username: param.username,
+        username: param?.username,
         code: data.code,
       })
       .then((res: AxiosResponse<ApiResponse>) => {
