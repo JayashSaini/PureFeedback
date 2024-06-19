@@ -17,6 +17,10 @@
       "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
     },
     {
+      "src": "/",
+      "dest": "/"
+    },
+    {
       "src": "/sign-up",
       "dest": "/sign-up"
     },
