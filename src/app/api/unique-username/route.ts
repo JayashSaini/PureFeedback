@@ -7,6 +7,8 @@ const uniqueUserNameSchema = z.object({
   username: usernameValidator,
 });
 
+export const dynamic = "force-dynamic"; // This ensures the route is treated as dynamic
+
 export async function GET(request: Request) {
   await connectDB();
   try {
@@ -19,16 +21,17 @@ export async function GET(request: Request) {
 
     if (!result.success) {
       const usernameErrors = result.error.format().username?._errors || [];
-      return Response.json(
-        {
+      return new Response(
+        JSON.stringify({
           success: false,
           message:
             usernameErrors?.length > 0
               ? usernameErrors.join(", ")
               : "Invalid username provided",
-        },
+        }),
         {
           status: 400,
+          headers: { "Content-Type": "application/json" },
         }
       );
     }
@@ -38,35 +41,38 @@ export async function GET(request: Request) {
     });
 
     if (user) {
-      return Response.json(
-        {
+      return new Response(
+        JSON.stringify({
           success: false,
-          message: "Username is  already taken",
-        },
+          message: "Username is already taken",
+        }),
         {
           status: 400,
+          headers: { "Content-Type": "application/json" },
         }
       );
     }
 
-    return Response.json(
-      {
+    return new Response(
+      JSON.stringify({
         success: true,
         message: "Username is available",
-      },
+      }),
       {
         status: 200,
+        headers: { "Content-Type": "application/json" },
       }
     );
   } catch (error) {
-    console.log("Error checking unique username : ", error);
-    return Response.json(
-      {
+    console.log("Error checking unique username: ", error);
+    return new Response(
+      JSON.stringify({
         success: false,
         message: "Error checking unique username",
-      },
+      }),
       {
-        status: 400,
+        status: 500, // It's better to return a 500 status for server errors
+        headers: { "Content-Type": "application/json" },
       }
     );
   }

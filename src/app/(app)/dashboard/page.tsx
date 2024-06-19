@@ -113,14 +113,10 @@ const Page = () => {
     }
   };
 
-  // if user is not authenticated then directly display this message
-  useCallback(() => {
-    if ((!session || !session?.user) && !isLoading) {
-      return <>Please Login!</>;
-    }
-  }, [isLoading]);
-
-  const baseUrl = `${window.location.protocol}//${window.location.hostname}`;
+  const baseUrl =
+    typeof window !== "undefined"
+      ? `${window.location.protocol}//${window.location.hostname}`
+      : "";
   const profileUrl = `${baseUrl}/u/${session?.user?.username}`;
 
   // dynamic URL Clipboard Copy settings
